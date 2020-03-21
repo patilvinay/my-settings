@@ -33,6 +33,7 @@ P10K=$HOME/.p10k.zsh
   ln -s $PWD/.p10k.zsh $P10K
   ln -s $PWD/oh-my-zsh $OH_MY_ZSH 
   ln -s $PWD/tmux $TMUX 
-
+  ln -s $PWD/powerlevel10k ~/powerline10k 
+  chsh -s /bin/zsh
 
 
