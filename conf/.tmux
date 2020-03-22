@@ -1,0 +1,1 @@
+/home/vin/my-settings/conf/../tmux

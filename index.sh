@@ -13,7 +13,10 @@ TMUX_CONF=$HOME/.tmux.conf
 OH_MY_ZSH=$HOME/.oh-my-zsh
 TMUX=$HOME/.tmux
 P10K=$HOME/.p10k.zsh
-
+  sudo apt install zsh
+  git clone https://github.com/ohmyzsh/ohmyzsh.git
+  mkdir $HOME
+  export PATH=$PATH:$HOME/bin
   cp $VIMRC $HOME/.vimrc.$TS
   cp $TMUX_CONF $HOME/.tmux.conf.$TS
   cp $ZSHRC $HOME/.zshrc.$TS
@@ -31,9 +34,9 @@ P10K=$HOME/.p10k.zsh
   ln -s $PWD/tmux.conf $TMUX_CONF
   ln -s $PWD/zshrc $ZSHRC
   ln -s $PWD/.p10k.zsh $P10K
-  ln -s $PWD/oh-my-zsh $OH_MY_ZSH 
+  ln -s $PWD/ohmyzsh $OH_MY_ZSH 
   ln -s $PWD/tmux $TMUX 
   ln -s $PWD/powerlevel10k ~/powerline10k 
-  chsh -s /bin/zsh
+  chsh -s $(which zsh)
 
 
