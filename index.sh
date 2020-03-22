@@ -100,7 +100,14 @@ done
 
 }
 
+get_fonts(){
+wget "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"  -P  ~/.local/share/fonts/Hack-Regular.ttf
+
+}
+
 clone_repos
+get_fonts
+
   #git_pull git@github.com:tmux-plugins/tpm.git
  
 
