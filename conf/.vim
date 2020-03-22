@@ -1,1 +1,1 @@
-/home/vin/my-settings/conf/../vim
+/home/vinay/my-settings/.vim

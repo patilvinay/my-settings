@@ -145,12 +145,79 @@ install_dotfiles () {
 }
 
 #setup_gitconfig
-install_dotfiles
+create_sym_link_to_dir(){
+array_name=(tmux
+  oh-my-zsh
+  vim
+  powerlevel10k
+  )
+
+  local overwrite_all=false backup_all=false skip_all=false
+
+  echo $array_name
+   for _file in ${array_name[@]}
+   do
+     dst=$HOME/.$_file
+     src=$PWD/$_file        
+     link_file  "$src" "$dst"
+     #echo "$dst" "$src"
+
+  done
+
+}
+
+create_sym_link_to_rcfiles(){
+array_name=(zshrc
+   tmux.conf
+   vimrc
+   p10k.zsh
+  )
+
+  local overwrite_all=false backup_all=false skip_all=false
+
+  echo $array_name
+   for _file in ${array_name[@]}
+   do
+     dst=$HOME/.$_file
+     src=$PWD/conf/.$_file        
+     link_file  "$src" "$dst"
+     
+
+  done
+
+}
+
+make_zsh_default()
+{
+   user "make zsh as default shell?\n\
+        [y]Yes, [n]No?"
+    read -n 1 action
+
+     case "$action" in
+          y )
+            chsh -s $(which zsh)
+            success "installed zsh as your default shell"
+            ;;
+          Y )
+            chsh -s $(which zsh)
+            success "installed zsh as your default shell"
+            ;;
+          * )
+            info "Skiping;"
+            ;;
+        esac
+
+}
+#install_file
+make_zsh_default
+create_sym_link_to_dir
+create_sym_link_to_rcfiles
+#install_dotfiles
 
 # find the installers and run them iteratively
-for installer in $(find . -name "*install.sh"); do
+#for installer in $(find . -name "*install.sh"); do
   #sh -c "${installer}"
-done
+#done
 
 echo ''
 echo '  All installed!'

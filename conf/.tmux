@@ -1,1 +1,1 @@
-/home/vin/my-settings/conf/../tmux
+/home/vinay/my-settings/.tmux
