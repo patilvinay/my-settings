@@ -2,13 +2,13 @@
 
 
 repo_0=(
-  "git@github.com:ohmyzsh/ohmyzsh.git" 
+  "http://github.com/ohmyzsh/ohmyzsh.git" 
   "$PWD/oh-my-zsh")
 repo_1=(
-  "git@github.com:romkatv/powerlevel10k.git" 
+  "http://github.com/romkatv/powerlevel10k.git" 
   "$PWD/powerlevel10k")
 repo_2=(
-  "git@github.com:tmux-plugins/tpm.git" 
+  "http://github.com/tmux-plugins/tpm.git" 
   "$PWD/tpm")
 
 MAIN_ARRAY=(
