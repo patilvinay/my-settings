@@ -1,42 +1,97 @@
 #!/bin/bash
 
-
 TS=$(date "+%Y-%m-%d-%H-%M-%S")
-echo $TS
-HOME=~
 
+user () {
+  printf "\r  [ \033[0;33m??\033[0m ] $1\n"
+}
+success () {
+  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
+}
+info () {
+  printf "\r  [ \033[00;34m..\033[0m ] $1\n"
+}
 
-# copy new files to replace existing files
-VIMRC=$HOME/.vimrc
-ZSHRC=$HOME/.zshrc
-TMUX_CONF=$HOME/.tmux.conf
-OH_MY_ZSH=$HOME/.oh-my-zsh
-TMUX=$HOME/.tmux
-P10K=$HOME/.p10k.zsh
-  sudo apt install zsh
-  git clone https://github.com/ohmyzsh/ohmyzsh.git
-  mkdir $HOME
-  export PATH=$PATH:$HOME/bin
-  cp $VIMRC $HOME/.vimrc.$TS
-  cp $TMUX_CONF $HOME/.tmux.conf.$TS
-  cp $ZSHRC $HOME/.zshrc.$TS
-  cp $P10K $HOME/.p10k.zsh.$TS
-  mv $OH_MY_ZSH $OH_MY_ZSH-$TS
-  mv $TMUX $TMUX-$TS
-
-  rm $VIMRC
-  rm $TMUX_CONF
-  rm $ZSHRC
-  rm $TMUX
-  rm $P10K
+git_pull()
+{
+  # settings / change this to your config
+  #git_pull repo local_folder
   
-  ln -s $PWD/vimrc $VIMRC
-  ln -s $PWD/tmux.conf $TMUX_CONF
-  ln -s $PWD/zshrc $ZSHRC
-  ln -s $PWD/.p10k.zsh $P10K
-  ln -s $PWD/ohmyzsh $OH_MY_ZSH 
-  ln -s $PWD/tmux $TMUX 
-  ln -s $PWD/powerlevel10k ~/powerline10k 
-  chsh -s $(which zsh)
+repo=$1
+local_folder=$2
+cloneCmd="git clone"
+cloneCmd="$cloneCmd $repo $local_folder"
+strr="Cloning git $repo to $local_folder"
+info $strr
+
+if [[ -d $local_folder ]]
+then
+ user "Folder $localfolder already exist,backup and continue?\n\
+        [y]Yes, [n]No?"
+    read -n 1 action
+
+     case "$action" in
+          y )
+            
+            mv $local_folder "${local_folder}.$TS"
+            eval $($cloneCmd 2>&1)
+            success "git clone $repo sucess"
+            ;;
+          Y )
+            mv $local_folder "${local_folder}.$TS"
+            eval $($cloneCmd 2>&1)
+            success "git clone $repo sucess"
+            ;;
+          * )
+            info "Skiping;"
+            ;;
+        esac
+ else
+  eval $($cloneCmd  2>/dev/null)
+  success "git clone $repo sucess"
+ fi       
+
+  
+}
 
 
+
+
+
+
+repo_0=(
+  "git@github.com:ohmyzsh/ohmyzsh.git" 
+  "$PWD/oh-my-zsh")
+repo_1=(
+  "git@github.com:romkatv/powerlevel10k.git" 
+  "$PWD/powerlevel10k")
+repo_2=(
+  "git@github.com:tmux-plugins/tpm.git" 
+  "$PWD/tpm")
+  
+  
+
+
+MAIN_ARRAY=(
+  repo_0[@]
+  repo_1[@]
+  repo_2[@]
+)
+
+# Loop and print it.  Using offset and length to extract values
+COUNT=${#MAIN_ARRAY[@]}
+for ((i=0; i<$COUNT; i++))
+do
+  _repo=${!MAIN_ARRAY[i]:0:1}
+  _local_folder=${!MAIN_ARRAY[i]:1:1}
+   git_pull $_repo  $_local_folder
+ # echo $_repo $_local_folder
+done
+
+
+  #git_pull git@github.com:tmux-plugins/tpm.git
+ 
+
+
+
+#git_pull 
