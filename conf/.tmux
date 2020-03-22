@@ -1,1 +1,0 @@
-/home/vinay/my-settings/.tmux
