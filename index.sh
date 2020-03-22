@@ -1,5 +1,26 @@
 #!/bin/bash
 
+
+repo_0=(
+  "git@github.com:ohmyzsh/ohmyzsh.git" 
+  "$PWD/oh-my-zsh")
+repo_1=(
+  "git@github.com:romkatv/powerlevel10k.git" 
+  "$PWD/powerlevel10k")
+repo_2=(
+  "git@github.com:tmux-plugins/tpm.git" 
+  "$PWD/tpm")
+
+MAIN_ARRAY=(
+  repo_0[@]
+  repo_1[@]
+  repo_2[@]
+)
+
+
+
+
+
 TS=$(date "+%Y-%m-%d-%H-%M-%S")
 
 user () {
@@ -22,7 +43,7 @@ local_folder=$2
 cloneCmd="git clone"
 cloneCmd="$cloneCmd $repo $local_folder"
 strr="Cloning git $repo to $local_folder"
-info $strr
+info "$strr"
 
 if [[ -d $local_folder ]]
 then
@@ -34,12 +55,12 @@ then
           y )
             
             mv $local_folder "${local_folder}.$TS"
-            eval $($cloneCmd 2>&1)
+             eval $($cloneCmd  2>/dev/null)
             success "git clone $repo sucess"
             ;;
           Y )
             mv $local_folder "${local_folder}.$TS"
-            eval $($cloneCmd 2>&1)
+             eval $($cloneCmd  2>/dev/null)
             success "git clone $repo sucess"
             ;;
           * )
@@ -59,26 +80,15 @@ then
 
 
 
-repo_0=(
-  "git@github.com:ohmyzsh/ohmyzsh.git" 
-  "$PWD/oh-my-zsh")
-repo_1=(
-  "git@github.com:romkatv/powerlevel10k.git" 
-  "$PWD/powerlevel10k")
-repo_2=(
-  "git@github.com:tmux-plugins/tpm.git" 
-  "$PWD/tpm")
-  
-  
 
-
-MAIN_ARRAY=(
-  repo_0[@]
-  repo_1[@]
-  repo_2[@]
-)
 
 # Loop and print it.  Using offset and length to extract values
+
+
+
+
+clone_repos()
+{
 COUNT=${#MAIN_ARRAY[@]}
 for ((i=0; i<$COUNT; i++))
 do
@@ -88,7 +98,9 @@ do
  # echo $_repo $_local_folder
 done
 
+}
 
+clone_repos
   #git_pull git@github.com:tmux-plugins/tpm.git
  
 
