@@ -74,8 +74,14 @@ ZSH_THEME="agnoster"
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
+
+
+#https://gist.github.com/dogrocker/1efb8fd9427779c827058f873b94df95
+#git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+#git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+#git clone https://github.com/MichaelAquilina/zsh-you-should-use.git $ZSH_CUSTOM/plugins/you-should-use
+plugins=(git kubectl helm zsh-autosuggestions zsh-syntax-highlighting you-should-use common-aliases)
 
 source $ZSH/oh-my-zsh.sh
 
